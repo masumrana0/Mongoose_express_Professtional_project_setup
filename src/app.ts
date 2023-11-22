@@ -1,8 +1,14 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Application } from 'express';
+import cors from 'cors';
+import GlobalErrorHandler from './app/middlewares/GlobalErrorHanlder';
 const app: Application = express();
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
-});
+app.use(cors());
 
+//parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Global Error handler
+app.use(GlobalErrorHandler);
 export default app;
